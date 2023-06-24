@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
+import { ethers } from "ethers";
+import abi from '../components/data/Videre.json'
 
 const Form = () => {
   const [uploadedOntoIpfs, setUploadedOntoIpfs] = useState(false)
   const [videoInserted, setVideoInserted] = useState(false)
   const [keyword, setKeyword] = useState(''); // Add this line to manage keyword input state
   const [metadataURI, setMetadataURI] = useState('')
+  const [contentIpfsHash, setContentIpfsHash] = useState('')
+
+  const contractAddress = '0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0' 
+  const contractABI = abi.abi
+  const [videreContract, setVidereContract] = useState(null);
 
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -53,7 +60,22 @@ const Form = () => {
     }
   }
 
-  async function createMetadata() {
+  const createVideo = async () => {
+    try {
+      console.log("creating")
+      const upload = await videreContract.createVideo(
+        inputValue.name, contentIpfsHash, inputValue.listOfKeywords, metadataURI
+      )
+
+      await upload.wait()
+
+      alert("Created!")
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  const createMetadata = async () => {
     try {
       const metadata = {
           name: inputValue.name,
@@ -63,7 +85,7 @@ const Form = () => {
       const { path } = await ipfs.add(JSON.stringify(metadata));
       const metadataUri = "ipfs://" + path;
   
-      setMetadataURI(metadataURI)
+      setMetadataURI(metadataUri)
     } catch (error) {
       alert("Error with creating metadata", error)
     }
@@ -74,6 +96,7 @@ const Form = () => {
       setVideoInserted(true)
       try {
         const ipfsData = await uploadImageOntoIpfs(event.target.files[0]);
+        setContentIpfsHash(ipfsData.path)
         inputValue.contentIpfsHash = ipfsData.path
         setUploadedOntoIpfs(true)
 
@@ -82,11 +105,23 @@ const Form = () => {
       }
     }  
   };
+
+  useEffect(() => {
+    const initEthereum = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const videreContract = new ethers.Contract(contractAddress, contractABI, signer);
+      setVidereContract(videreContract);
+    };
+
+    initEthereum()
+  }, [])
+  
   
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='mt-10'>
-        <h1 className='font-bold'>Upload Video</h1>
+        <h1 className='font-bold'>Upload Video Content</h1>
       </div>
 
       <div className='mt-10'>
@@ -115,7 +150,7 @@ const Form = () => {
           />
 
           {videoInserted && uploadedOntoIpfs ? (
-              <h1 className='text-green-600 mb-5'>Uploaded onto ipfs! - {inputValue.contentIpfsHash}</h1>
+              <h1 className='text-green-600 mb-5'>Uploaded onto ipfs! - {contentIpfsHash}</h1>
           ) : (
               videoInserted ? (
                 <h1>Uploading onto ipfs...</h1>
@@ -148,9 +183,20 @@ const Form = () => {
           </ul>
         </form>
 
-        <button onClick={createMetadata}>
-
+        <button onClick={createMetadata} className='border-2 border-black p-2 rounded-lg hover:bg-black hover:text-white hover:ease-in-out-800 transition'> 
+              Create metadata URI
         </button>
+
+        <h1>{metadataURI}</h1>
+
+        {metadataURI && (
+            <button 
+              onClick={createVideo}
+              className='text-white bg-pink-500 p-2 rounded-lg hover:animate-pulse hover:opacity-80 mt-5'
+            >
+              Create Video!
+            </button>
+          )}
       </div>
     </div>
   )
