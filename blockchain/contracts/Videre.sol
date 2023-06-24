@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+// POLYGON MUMBAI : 0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0
+pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -7,9 +8,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "https://github.com/erc6551/reference/blob/main/src/lib/ERC6551AccountLib.sol";
+import "@erc6551/reference/src/lib/ERC6551AccountLib.sol";
 
-contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
+contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -18,7 +19,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
 
     uint256 numofAdvertisements;
     uint256 numOfVideos;
-    address[] worldcoinVerifiedAddresses;
+    uint256 numOfContentCreators;
 
     struct Advertisement {
         uint256 advertisementId;
@@ -57,7 +58,21 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
     mapping(uint256 => Video) public _videos;
     mapping(address => ContentCreator) public _contentCreators;
 
-    
+    function registerAccount(
+        string memory _username,
+        bool _isAdvitiser
+    ) public {
+        require(_contentCreators[msg.sender].isRegistered == false, "You have already registered your account");
+        require(bytes(_username).length > 0, "There must be a username to your advertisment");
+
+        ContentCreator storage newContentCreator = _contentCreators[msg.sender];
+
+        newContentCreator.walletAddress = msg.sender;
+        newContentCreator.username = _username;
+        newContentCreator.totalVideoLikes = 0;
+        newContentCreator.isAdvertiser = _isAdvitiser;
+        newContentCreator.isRegistered = true;
+    }
 
     function createAdvertisement(
         string memory _name, 
@@ -65,11 +80,12 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         string[] memory _listOfKeywords,
         uint256 _stakedAmount
     ) payable public {
-        require(bytes(_name).length > 0, "There must be a name to your advertisment");
-        require(bytes(_contentIpfsHash).length > 0, "There must be an asset to your advertisment");
-        require(_listOfKeywords.length <= 10, "You can only have up to 10 keywords");
+        require(bytes(_name).length > 0, "No name to your advertisment");
+        require(bytes(_contentIpfsHash).length > 0, "No asset to your advertisment");
+        require(_listOfKeywords.length <= 10, "Up to 10 keywords");
         require(_stakedAmount > 0, "Staked amount must be greater than zero ETH");
-        require(msg.value == _stakedAmount, "Value sent must be same as your specified staked amount");
+        require(msg.value == _stakedAmount, "Value sent == specified staked amount");
+        require(_contentCreators[msg.sender].isAdvertiser == true, "!videos if content creator");
 
         Advertisement storage newAdvertisement = _advertisements[numofAdvertisements];
 
@@ -89,10 +105,11 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         string[] memory _listOfKeywords,
         string memory uri
     ) public {
-        require(bytes(_name).length > 0, "There must be a name to your video");
-        require(bytes(_contentIpfsHash).length > 0, "There must be a video to your upload");
-        require(_listOfKeywords.length <= 10, "You can only have up to 10 keywords");
-        require(bytes(uri).length > 0, "There must be a URI to your video");
+        require(bytes(_name).length > 0, "name to your video");
+        require(bytes(_contentIpfsHash).length > 0, "Video to your upload");
+        require(_listOfKeywords.length <= 10, "up to 10 keywords");
+        require(bytes(uri).length > 0, "URI to your video");
+        require(_contentCreators[msg.sender].isAdvertiser == false, "!videos advitiser");
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -129,9 +146,11 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
 
         video.numOfLikes++;
         video.likedAddresses.push(msg.sender);
+
+        _contentCreators[video.creator].totalVideoLikes++;
     }
 
-    function getAdFunds(uint256 _tokenId, uint256 _tokenContract, uint256 _advertisementId, uint256 _videoId) public payable {
+    function getAdFunds(uint256 _tokenId, address _tokenContract, uint256 _advertisementId, uint256 _videoId) public payable {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
@@ -159,7 +178,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         uint256 chainId = 80001; // Polygon Mumbai
         address tokenContract = _tokenContract;
         uint256 tokenId = _tokenId;
-        uint256 _salt = 0;
+        uint _salt = 0;
 
         address tbaAddress = ERC6551AccountLib.computeAddress(registry, implementation, chainId, tokenContract, tokenId, _salt);
 
@@ -169,7 +188,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         video.amountOfEthCollected += totalAmountToDistribute;
     }
 
-    function matchAdContent(uint256 _advertisementId, uint256 _videoId, uint256 percentage) public {
+    function matchAdContent(uint256 _advertisementId, uint256 _videoId) public {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
@@ -178,6 +197,19 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
     }
   
     // View functions 
+    function getContentCreatorInfo(address _contentCreator) public view returns (
+        address, string memory, uint256, bool, bool, bool
+    ) {
+        return (
+            _contentCreators[_contentCreator].walletAddress,
+            _contentCreators[_contentCreator].username,
+            _contentCreators[_contentCreator].totalVideoLikes,
+            _contentCreators[_contentCreator].isWorldcoinVerified,
+            _contentCreators[_contentCreator].isAdvertiser,
+            _contentCreators[_contentCreator].isRegistered
+        );
+    }
+    
     function getAdvertisement(uint256 _advertisementId) public view returns (
         uint256, string memory, address, string memory, string[] memory, uint256[] memory, uint256
     ) {
@@ -218,10 +250,6 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
             _videos[_videoId].numOfLikes, 
             _videos[_videoId].likedAddresses
         );
-    }
-
-    function getWorldcoinVerifiedAddresses() public view returns (address[] memory) {
-        return worldcoinVerifiedAddresses;
     }
 
     // The following functions are overrides required by Solidity.

@@ -7,6 +7,8 @@
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
     "@erc6551/reference": "github:erc6551/reference",
-    "@openzeppelin/contracts": "^4.9.2"
+    "@openzeppelin/contracts": "^4.9.2",
+    "dotenv": "^16.3.1",
+    "hardhat-preprocessor": "^0.1.5"
   }
 }
