@@ -2,14 +2,14 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/rexanwong/Dropbox/Mac/Documents/blockchain-projects/ethglobal_waterloo_2023/blockchain/contracts/Videre.sol": {
-      "lastModificationDate": 1687640136033,
-      "contentHash": "1ff1866cbcf68e3d76c2071d8fda71b1",
+      "lastModificationDate": 1687640720331,
+      "contentHash": "7ef0f1fac83c9e608b5f4e83953a77c1",
       "sourceName": "contracts/Videre.sol",
       "solcConfig": {
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -28,7 +28,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -56,7 +56,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -75,7 +75,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -98,7 +98,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -117,7 +117,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -138,7 +138,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -157,7 +157,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -186,7 +186,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -205,7 +205,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -229,7 +229,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -248,7 +248,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -272,7 +272,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -291,7 +291,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -315,7 +315,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -334,7 +334,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -355,7 +355,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -374,7 +374,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -395,7 +395,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -414,7 +414,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -438,7 +438,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -457,7 +457,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -480,7 +480,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -499,7 +499,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -520,7 +520,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -539,7 +539,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -562,7 +562,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -581,7 +581,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -604,7 +604,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -623,7 +623,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -644,7 +644,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -663,7 +663,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -684,7 +684,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -703,7 +703,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -724,7 +724,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -743,7 +743,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -767,7 +767,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -786,7 +786,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -807,7 +807,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -826,7 +826,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -847,7 +847,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -866,7 +866,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -889,7 +889,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -908,7 +908,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }
@@ -929,7 +929,7 @@
         "version": "0.8.1",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
           "outputSelection": {
@@ -948,7 +948,7 @@
           },
           "libraries": {
             "": {
-              "__CACHE_BREAKER__": "0x0000000000000031363837363430313732383536"
+              "__CACHE_BREAKER__": "0x0000000000000031363837363430393730383530"
             }
           }
         }

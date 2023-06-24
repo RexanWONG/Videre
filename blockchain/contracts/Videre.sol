@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// POLYGON MUMBAI : 0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0
 pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -79,12 +80,12 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         string[] memory _listOfKeywords,
         uint256 _stakedAmount
     ) payable public {
-        require(bytes(_name).length > 0, "There must be a name to your advertisment");
-        require(bytes(_contentIpfsHash).length > 0, "There must be an asset to your advertisment");
-        require(_listOfKeywords.length <= 10, "You can only have up to 10 keywords");
+        require(bytes(_name).length > 0, "No name to your advertisment");
+        require(bytes(_contentIpfsHash).length > 0, "No asset to your advertisment");
+        require(_listOfKeywords.length <= 10, "Up to 10 keywords");
         require(_stakedAmount > 0, "Staked amount must be greater than zero ETH");
-        require(msg.value == _stakedAmount, "Value sent must be same as your specified staked amount");
-        require(_contentCreators[msg.sender].isAdvertiser == true, "You canno't create videos as an content creator");
+        require(msg.value == _stakedAmount, "Value sent == specified staked amount");
+        require(_contentCreators[msg.sender].isAdvertiser == true, "!videos if content creator");
 
         Advertisement storage newAdvertisement = _advertisements[numofAdvertisements];
 
@@ -104,11 +105,11 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         string[] memory _listOfKeywords,
         string memory uri
     ) public {
-        require(bytes(_name).length > 0, "There must be a name to your video");
-        require(bytes(_contentIpfsHash).length > 0, "There must be a video to your upload");
-        require(_listOfKeywords.length <= 10, "You can only have up to 10 keywords");
-        require(bytes(uri).length > 0, "There must be a URI to your video");
-        require(_contentCreators[msg.sender].isAdvertiser == false, "You canno't create videos as an advitiser");
+        require(bytes(_name).length > 0, "name to your video");
+        require(bytes(_contentIpfsHash).length > 0, "Video to your upload");
+        require(_listOfKeywords.length <= 10, "up to 10 keywords");
+        require(bytes(uri).length > 0, "URI to your video");
+        require(_contentCreators[msg.sender].isAdvertiser == false, "!videos advitiser");
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -177,7 +178,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         uint256 chainId = 80001; // Polygon Mumbai
         address tokenContract = _tokenContract;
         uint256 tokenId = _tokenId;
-        uint256 _salt = 0;
+        uint _salt = 0;
 
         address tbaAddress = ERC6551AccountLib.computeAddress(registry, implementation, chainId, tokenContract, tokenId, _salt);
 
