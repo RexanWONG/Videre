@@ -46,7 +46,7 @@ const Profile: React.FC = () => {
                       <GoVerified className="text-blue-500" />
                       {showTooltip && (
                         <div className="absolute left-1/2 bottom-full transform -translate-x-1/2 mt-2 bg-green-100 px-4 py-2 text-sm rounded text-center">
-                          <p className="text-gray-500">Videre Verified</p>
+                          <p className="text-green-500">Worldcoin Verified</p>
                         </div>
                       )}
                     </div>
