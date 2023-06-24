@@ -13,7 +13,6 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
-    uint256 hello;
 
     constructor() ERC721("Videri Users Videos", "VUV") {}
 
@@ -188,7 +187,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         video.amountOfEthCollected += totalAmountToDistribute;
     }
 
-    function matchAdContent(uint256 _advertisementId, uint256 _videoId, uint256 percentage) public {
+    function matchAdContent(uint256 _advertisementId, uint256 _videoId) public {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
