@@ -1,6 +1,17 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type {AppProps} from 'next/app';
+import {UseState, useEffect} from 'react';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import '../styles/globals.css'
+
+const MyApp = ({Component, pageProps} : AppProps) => {
+  
+  return(
+    <div>
+      Navbar
+      Sidebar
+      <Component {...pageProps} />
+    </div>
+  );
 }
+
+export default MyApp
