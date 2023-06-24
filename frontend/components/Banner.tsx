@@ -8,7 +8,7 @@ const Banner: NextPage = () => {
       className="rounded-lg bg-[url('../assets/banner-bg.jpg')] bg-cover bg-center overflow-hidden bg-black"
       style={{ height: "200px" }}
     >
-      <div className="p-4 pl-8 pr-8">
+      <div className="p-4 pl-8 pr-8 text-right"> {/* Add 'text-right' class */}
         <h1 className="text-white text-3xl font-black font-montserrat">BUILDING THE FUTURE</h1>
         <p className="text-white font-medium font-raleway">Slogan Slogan</p>
       </div>

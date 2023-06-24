@@ -38,7 +38,7 @@ const normalLink = 'flex items-center gap-3 hover:bg-primary p-3 justify-center 
                 </div>
               </Link>
             </div>
-            <Footer />
+        
 
           </div>
         )}
