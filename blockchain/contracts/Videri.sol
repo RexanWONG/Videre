@@ -114,7 +114,7 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         video.numOfLikes++;
         video.likedAddresses.push(msg.sender);
     }
-
+  
     // View functions 
     function getAdvertisement(uint256 _advertisementId) public view returns (
         uint256, string memory, address, string memory, string[] memory, uint256[] memory, uint256
