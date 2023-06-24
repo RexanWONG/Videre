@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { AiFillHome, AiOutlineMenu } from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im';
-
+import Footer from './Footer';
 
 
 
@@ -37,6 +37,7 @@ const normalLink = 'flex items-center gap-3 hover:bg-primary p-3 justify-center 
                   </span>
                 </div>
               </Link>
+              <Footer />
             </div>
           </div>
         )}
