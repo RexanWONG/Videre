@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
+contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -68,7 +68,7 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         numofAdvertisements++;
     } 
 
-    function uploadVideo(
+    function createVideo(
         string memory _name,
         string memory _contentIpfsHash,
         string[] memory _listOfKeywords,
@@ -113,6 +113,30 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
         video.numOfLikes++;
         video.likedAddresses.push(msg.sender);
+    }
+
+    function matchAdContent(uint256 _advertisementId, uint256 _videoId, uint256 percentage) public {
+        Advertisement storage advertisement = _advertisements[_advertisementId];
+        Video storage video = _videos[_videoId];
+
+        uint matches = 0;
+
+        for(uint256 i = 0; i < advertisement.listOfKeywords.length; i++) {
+            for(uint256 j = 0; j < video.listOfKeywords.length; j++) {
+                if(keccak256(bytes(advertisement.listOfKeywords[i])) == keccak256(bytes(video.listOfKeywords[j]))) {
+                    matches++;
+                }
+            }
+        }
+
+        // Calculate the percentage of matched keywords from all keywords
+        uint256 totalKeywords = advertisement.listOfKeywords.length > video.listOfKeywords.length ? advertisement.listOfKeywords.length : video.listOfKeywords.length;
+        uint256 matchedPercentage = (matches * 100) / totalKeywords;
+
+        if (matchedPercentage >= percentage) {
+            advertisement.listOfContentLinked.push(_videoId);
+            video.listOfAdvertisementsLinked.push(_advertisementId);
+        }
     }
   
     // View functions 
