@@ -1,6 +1,6 @@
 import type {AppProps} from 'next/app';
 import {UseState, useEffect} from 'react';
-import {Navbar} from "../components";
+import {Navbar, Sidebar} from "../components";
 import '../styles/globals.css'
 
 const MyApp = ({Component, pageProps} : AppProps) => {
@@ -8,7 +8,7 @@ const MyApp = ({Component, pageProps} : AppProps) => {
   return(
     <div>
       <Navbar/>
-      Sidebar
+      <Sidebar />
       <Component {...pageProps} />
     </div>
   );
