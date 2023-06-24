@@ -29,6 +29,19 @@ const Navbar = () => {
      }
    };
  
+   const disconnectWallet = async () => {
+    try {
+      // Request user accounts from MetaMask
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+      // Update the current account state variable
+      setCurrentAccount(accounts[0]);
+    } catch (error) {
+      console.error("Error connecting wallet:", error);
+    }
+  };
+
+
    useEffect(() => {
      const checkMetaMask = async () => {
        if (ethereum && ethereum.isConnected()) {
@@ -58,6 +71,7 @@ const Navbar = () => {
         onClick={connectWallet}>Connect Wallet</button>
       ) : (
         <p>{currentAccount}</p>
+      
       )
       
       }

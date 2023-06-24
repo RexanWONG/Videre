@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AiFillHome, AiOutlineMenu, AiOutlineUser} from 'react-icons/ai';
+import { AiFillHome, AiOutlineMenu, AiOutlineUser, AiOutlineUpload} from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im';
 import Footer from './Footer';
 
@@ -38,12 +38,20 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
             </Link>
           </div>
           {isAuthenticated && (
+            <>
             <div className={pathname === '/' ? activeLink : normalLink}>
               <p className='text-2xl'>
                 <AiOutlineUser />
               </p>
               <span className='capitalize font-montserrat text-xl hidden xl:block'>Profile</span>
             </div>
+            <div className={pathname === '/' ? activeLink : normalLink}>
+              <p className='text-2xl'>
+                <AiOutlineUpload />
+              </p>
+              <span className='capitalize font-montserrat text-xl hidden xl:block'>Upload</span>
+            </div>
+            </>
           )}
         </div>
       )}
