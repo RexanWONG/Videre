@@ -5,7 +5,6 @@ import Logo from "../assets/videre-logo.png";
 import { IoMdAdd } from "react-icons/io";
 import { MetaMaskSDK } from '@metamask/sdk';
 
-
 const Navbar = () => {
    const [currentAccount, setCurrentAccount] = useState("");
 
@@ -57,7 +56,7 @@ const Navbar = () => {
         <button className=" border-2 px-2 md:px-6 py-2 md:py-3 bg-blue-400 text-white text-md font-semibold flex items-center gap-2 rounded-full hover:scale-110 hover:bg-blue-500 hover:text-white transition-all duration-200" 
         onClick={connectWallet}>Connect Wallet</button>
       ) : (
-        <p>Connected Account: {currentAccount}</p>
+        <p>{currentAccount}</p>
       )
       
       }
