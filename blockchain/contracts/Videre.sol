@@ -7,7 +7,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
+import "https://github.com/erc6551/reference/blob/main/src/lib/ERC6551AccountLib.sol";
+
+contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
@@ -39,6 +41,14 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         uint256[] listOfAdvertisementsLinked;
         uint256 numOfLikes;
         address[] likedAddresses;
+        uint256 amountOfEthCollected;
+    }
+
+    struct ContentCreator {
+        address walletAddress;
+        string username;
+        uint256 totalVideoLikes;
+        bool isWorldcoinVerified;
     }
 
     mapping(uint256 => Advertisement) public _advertisements;
@@ -94,6 +104,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         newVideo.contentIpfsHash = _contentIpfsHash;
         newVideo.listOfKeywords = _listOfKeywords;
         newVideo.numOfLikes = 0;
+        newVideo.amountOfEthCollected = 0;
 
         numOfVideos++;
     }  
@@ -113,6 +124,44 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
         video.numOfLikes++;
         video.likedAddresses.push(msg.sender);
+    }
+
+    function getAdFunds(uint256 _tokenId, uint256 _tokenContract, uint256 _advertisementId, uint256 _videoId) public payable {
+        Advertisement storage advertisement = _advertisements[_advertisementId];
+        Video storage video = _videos[_videoId];
+
+        uint256 count = 0;
+
+        for (uint256 i = 0 ; i < video.listOfAdvertisementsLinked.length ; ++i) {
+            if (video.listOfAdvertisementsLinked[i] == _advertisementId) {
+                count++;
+            }
+        }
+
+        require(count != 0, "This advertisement is not linked to your video");
+
+        uint256 numberOfLikes = video.numOfLikes;
+
+        // Calculate the total amount to be distributed to likes
+        uint256 totalAmountToDistribute = numberOfLikes * 0.01 ether;
+
+        require(advertisement.stakedAmount >= totalAmountToDistribute, "Not enough funds in the advertisement for the likes");
+
+        advertisement.stakedAmount -= totalAmountToDistribute;
+
+        address registry = 0x02101dfB77FDE026414827Fdc604ddAF224F0921;
+        address implementation = 0x2D25602551487C3f3354dD80D76D54383A243358;
+        uint256 chainId = 80001; // Polygon Mumbai
+        address tokenContract = _tokenContract;
+        uint256 tokenId = _tokenId;
+        uint256 _salt = 0;
+
+        address tbaAddress = ERC6551AccountLib.computeAddress(registry, implementation, chainId, tokenContract, tokenId, _salt);
+
+        (bool success, ) = tbaAddress.call{value: totalAmountToDistribute, gas: 2300}("");
+        require(success, "Transfer to creator failed");
+
+        video.amountOfEthCollected += totalAmountToDistribute;
     }
 
     function matchAdContent(uint256 _advertisementId, uint256 _videoId, uint256 percentage) public {
@@ -167,10 +216,11 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         );
     }
 
-    function getVideoBlockchainDetails(uint256 _videoId) public view returns (uint256, string memory) {
+    function getVideoBlockchainDetails(uint256 _videoId) public view returns (uint256, string memory, uint256) {
         return (
             _videos[_videoId].contentTokenID,
-            _videos[_videoId].contentURI
+            _videos[_videoId].contentURI,
+            _videos[_videoId].amountOfEthCollected
         );
     }
 

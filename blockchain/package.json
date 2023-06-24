@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.6.1",
+    "@erc6551/reference": "github:erc6551/reference",
     "@openzeppelin/contracts": "^4.9.2"
   }
 }
