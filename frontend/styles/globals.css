@@ -32,3 +32,14 @@ a {
 * {
   box-sizing: border-box;
 }
+.eth-card {
+  background-color:hsla(265,36%,48%,1);
+background-image:
+radial-gradient(at 30% 93%, hsla(274,81%,78%,1) 0px, transparent 50%),
+radial-gradient(at 31% 64%, hsla(28,87%,72%,1) 0px, transparent 50%),
+radial-gradient(at 57% 57%, hsla(176,72%,68%,1) 0px, transparent 50%),
+radial-gradient(at 16% 3%, hsla(208,65%,72%,1) 0px, transparent 50%),
+radial-gradient(at 98% 60%, hsla(165,71%,78%,1) 0px, transparent 50%),
+radial-gradient(at 70% 14%, hsla(256,64%,75%,1) 0px, transparent 50%),
+radial-gradient(at 67% 96%, hsla(0,97%,75%,1) 0px, transparent 50%);
+}
