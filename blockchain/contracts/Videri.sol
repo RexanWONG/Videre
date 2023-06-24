@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -16,6 +16,7 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     uint256 numofAdvertisements;
     uint256 numOfVideos;
+    address[] worldcoinVerifiedAddresses;
 
     struct Advertisement {
         uint256 advertisementId;
@@ -154,6 +155,10 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
             _videos[_videoId].numOfLikes, 
             _videos[_videoId].likedAddresses
         );
+    }
+
+    function getWorldcoinVerifiedAddresses() public view returns (address[] memory) {
+        return worldcoinVerifiedAddresses;
     }
 
     // The following functions are overrides required by Solidity.
