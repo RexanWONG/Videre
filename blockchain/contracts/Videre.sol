@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -7,12 +7,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "https://github.com/erc6551/reference/blob/main/src/lib/ERC6551AccountLib.sol";
+import "@erc6551/reference/src/lib/ERC6551AccountLib.sol";
 
-contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
+contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
+    uint256 hello;
 
     constructor() ERC721("Videri Users Videos", "VUV") {}
 
@@ -64,7 +65,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         require(_contentCreators[msg.sender].isRegistered == false, "You have already registered your account");
         require(bytes(_username).length > 0, "There must be a username to your advertisment");
 
-        ContentCreator storage newContentCreator = _contentCreators[numOfContentCreators];
+        ContentCreator storage newContentCreator = _contentCreators[msg.sender];
 
         newContentCreator.walletAddress = msg.sender;
         newContentCreator.username = _username;
@@ -149,7 +150,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         _contentCreators[video.creator].totalVideoLikes++;
     }
 
-    function getAdFunds(uint256 _tokenId, uint256 _tokenContract, uint256 _advertisementId, uint256 _videoId) public payable {
+    function getAdFunds(uint256 _tokenId, address _tokenContract, uint256 _advertisementId, uint256 _videoId) public payable {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
@@ -197,7 +198,7 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
   
     // View functions 
     function getContentCreatorInfo(address _contentCreator) public view returns (
-        address, string, uint256, bool, bool, bool
+        address, string memory, uint256, bool, bool, bool
     ) {
         return (
             _contentCreators[_contentCreator].walletAddress,
