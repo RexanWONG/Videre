@@ -149,8 +149,11 @@ contract Videri is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         );
     }
 
-    function getNumOfLikes(uint256 _videoId) public view returns (uint256) {
-        return _videos[_videoId].numOfLikes;
+    function getVideoLikesInfo(uint256 _videoId) public view returns (uint256, address[] memory) {
+        return (
+            _videos[_videoId].numOfLikes, 
+            _videos[_videoId].likedAddresses
+        );
     }
 
     // The following functions are overrides required by Solidity.
