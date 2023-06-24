@@ -19,7 +19,7 @@ const Header = ({ title, mt }: { title: string, mt: Boolean }) => (
     </div>
   );
 const Footer: NextPage = () => (
-  <div className='mt-6 hidden xl:block'>
+  <div className='mt-6 font-raleway hidden xl:block'>
     <Header title = "Company" mt = {false} />
     <List items={footerCompany} mt = {false} />
     <Header title = "Support" mt />

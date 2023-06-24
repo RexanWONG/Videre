@@ -32,7 +32,7 @@ const normalLink = 'flex items-center gap-3 hover:bg-primary p-3 justify-center 
                   <p className='text-2xl'>
                     <AiFillHome />
                   </p>
-                  <span className='capitalize text-xl hidden xl:block'>
+                  <span className='capitalize font-montserrat text-xl hidden xl:block'>
                     For You
                   </span>
                 </div>
