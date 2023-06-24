@@ -49,10 +49,15 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         string username;
         uint256 totalVideoLikes;
         bool isWorldcoinVerified;
+        bool isAdvertiser;
+        bool isRegistered;
     }
 
     mapping(uint256 => Advertisement) public _advertisements;
     mapping(uint256 => Video) public _videos;
+    mapping(address => ContentCreator) public _contentCreators;
+
+    
 
     function createAdvertisement(
         string memory _name, 
@@ -168,24 +173,8 @@ contract Videre is ERC721Enumerable, ERC721URIStorage, Ownable {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
-        uint matches = 0;
-
-        for(uint256 i = 0; i < advertisement.listOfKeywords.length; i++) {
-            for(uint256 j = 0; j < video.listOfKeywords.length; j++) {
-                if(keccak256(bytes(advertisement.listOfKeywords[i])) == keccak256(bytes(video.listOfKeywords[j]))) {
-                    matches++;
-                }
-            }
-        }
-
-        // Calculate the percentage of matched keywords from all keywords
-        uint256 totalKeywords = advertisement.listOfKeywords.length > video.listOfKeywords.length ? advertisement.listOfKeywords.length : video.listOfKeywords.length;
-        uint256 matchedPercentage = (matches * 100) / totalKeywords;
-
-        if (matchedPercentage >= percentage) {
-            advertisement.listOfContentLinked.push(_videoId);
-            video.listOfAdvertisementsLinked.push(_advertisementId);
-        }
+        advertisement.listOfContentLinked.push(_videoId);
+        video.listOfAdvertisementsLinked.push(_advertisementId);
     }
   
     // View functions 
