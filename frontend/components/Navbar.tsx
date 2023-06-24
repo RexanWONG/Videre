@@ -5,6 +5,7 @@ import Logo from "../assets/videre-logo.png";
 import { IoMdAdd } from "react-icons/io";
 import { MetaMaskSDK } from '@metamask/sdk';
 
+
 const Navbar = () => {
    const [currentAccount, setCurrentAccount] = useState("");
 
@@ -61,6 +62,7 @@ const Navbar = () => {
       
       }
       </div>
+      
       </div>)}
 
       {/* <Link href="/upload">
