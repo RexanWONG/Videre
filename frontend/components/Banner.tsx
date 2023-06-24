@@ -9,8 +9,8 @@ const Banner: NextPage = () => {
       style={{ height: "200px" }}
     >
       <div className="p-4 pl-8 pr-8 text-right"> {/* Add 'text-right' class */}
-        <h1 className="text-white text-3xl font-black font-montserrat">BUILDING THE FUTURE</h1>
-        <p className="text-white font-medium font-raleway">Slogan Slogan</p>
+        <h1 className="text-white text-3xl font-black font-montserrat">Stay Connected</h1>
+        <p className="text-white font-medium font-raleway">with Videre™</p>
       </div>
     </div>
   );
