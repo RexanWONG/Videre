@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AiFillHome, AiOutlineMenu, AiOutlineUser, AiOutlineUpload} from 'react-icons/ai';
+import { AiFillHome, AiOutlineMenu,  AiOutlineUpload } from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im';
-import Footer from './Footer';
+import Profile from './Profile';
 
 interface SidebarProps {
   isAuthenticated: boolean;
 }
+
 
 const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
   const [displaySidebar, setDisplaySidebar] = useState(true);
@@ -20,37 +21,37 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
   return (
     <div>
       <div
-        className='cursor-pointer block xl:hidden m-2 ml-4 mt-3 text-xl'
+        className="cursor-pointer block xl:hidden m-2 ml-4 mt-3 text-xl"
         onClick={() => setDisplaySidebar(!displaySidebar)}
       >
         {displaySidebar ? <ImCancelCircle /> : <AiOutlineMenu />}
       </div>
       {displaySidebar && (
-        <div className='xl:w-250 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0 p-3 '>
-          <div className='xl:border-b-2 border-gray-200 xl:pb-4'>
-            <Link href='/'>
+        <div className="xl:w-250 w-20 flex flex-col justify-start mb-10 border-r-2 border-gray-100 xl:border-0p-3 ">
+          <div className="xl:border-b-2 border-gray-200 xl:pb-4">
+            <Link href="/">
               <div className={pathname === '/' ? activeLink : normalLink}>
-                <p className='text-2xl'>
+                <p className="text-2xl">
                   <AiFillHome />
                 </p>
-                <span className='capitalize font-montserrat text-xl hidden xl:block'>For You</span>
+                <span className="capitalize font-montserrat text-xl hidden xl:block">For You</span>
               </div>
             </Link>
           </div>
           {isAuthenticated && (
             <>
-            <div className={pathname === '/' ? activeLink : normalLink}>
-              <p className='text-2xl'>
-                <AiOutlineUser />
-              </p>
-              <span className='capitalize font-montserrat text-xl hidden xl:block'>Profile</span>
-            </div>
-            <div className={pathname === '/' ? activeLink : normalLink}>
-              <p className='text-2xl'>
-                <AiOutlineUpload />
-              </p>
-              <span className='capitalize font-montserrat text-xl hidden xl:block'>Upload</span>
-            </div>
+              <div className={pathname === '/profile' ? activeLink : normalLink}>
+                <Profile />
+                <span className="capitalize font-montserrat text-xl hidden xl:block">Profile</span>
+              </div>
+              <Link href="/upload">
+                <div className={pathname === '/upload' ? activeLink : normalLink}>
+                  <p className="text-2xl">
+                    <AiOutlineUpload />
+                  </p>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Upload</span>
+                </div>
+              </Link>
             </>
           )}
         </div>
