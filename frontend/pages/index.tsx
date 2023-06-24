@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { MetaMaskSDK } from '@metamask/sdk';
 import React, { useEffect, useState } from "react";
 
@@ -48,8 +49,22 @@ const Home: NextPage = () => {
       ) : (
         <p>Connected Account: {currentAccount}</p>
       )}
+=======
+import React from 'react';
+import type {NextPage} from 'next';
+import {Banner} from '../components';
+
+const Home : NextPage = () => {
+  return (
+    <div className='flex flex-col gap-10 h-full'>
+    <Banner />
+>>>>>>> Stashed changes
     </div>
   );
 };
 
+<<<<<<< Updated upstream
 export default Home;
+=======
+export default Home;
+>>>>>>> Stashed changes

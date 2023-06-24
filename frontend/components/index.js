@@ -1,7 +1,9 @@
-import Navbar from "./Navbar"
-import Sidebar from "./Sidebar"
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+import Banner from "./Banner";
 
 export{
     Navbar,
-    Sidebar
+    Sidebar,
+    Banner
 };
