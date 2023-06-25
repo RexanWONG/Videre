@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { ethers } from "ethers";
-import { AiFillPlusCircle, AiFillCloseCircle} from "react-icons/ai";
+import { AiFillPlusCircle, AiFillCloseCircle } from "react-icons/ai";
 import abi from "../components/data/Videre.json";
+import Upload from "../assets/upload.jpg";
+import Image from "next/image";
 
 const Form = () => {
   const [uploadedOntoIpfs, setUploadedOntoIpfs] = useState(false);
@@ -48,12 +50,13 @@ const Form = () => {
 
   const addKeyword = () => {
     const trimmedKeyword = keyword.trim();
-  
+
     if (trimmedKeyword !== "") {
       const isDuplicate = inputValue.listOfKeywords.some(
-        (existingKeyword) => existingKeyword.toLowerCase() === trimmedKeyword.toLowerCase()
+        (existingKeyword) =>
+          existingKeyword.toLowerCase() === trimmedKeyword.toLowerCase()
       );
-  
+
       if (!isDuplicate) {
         setInputValue((prevState) => ({
           ...prevState,
@@ -71,10 +74,11 @@ const Form = () => {
   const deleteKeyword = (keyword) => {
     setInputValue((prevState) => ({
       ...prevState,
-      listOfKeywords: prevState.listOfKeywords.filter((existingKeyword) => existingKeyword !== keyword),
+      listOfKeywords: prevState.listOfKeywords.filter(
+        (existingKeyword) => existingKeyword !== keyword
+      ),
     }));
   };
-
 
   const uploadImageOntoIpfs = async (file) => {
     const result = await ipfs.add(file);
@@ -152,136 +156,141 @@ const Form = () => {
 
   return (
     <div className="flex flex-col items-center justify-center font-raleway">
-
       <div className="flex flex-col md:flex-row w-full">
-      <div className="w-full md:w-1/2">
-  <h1 className="font-bold font-montserrat text-3xl text-left pl-0">Upload</h1>
-  <h1 className="font-bold font-montserrat text-l text-left pl-0">your adventure begins</h1>
-</div> 
-
-      <div className="w-full md:w-1/2">
-        <form>
-          <label
-            className="font-bold"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            Video Title
-          </label>
-
-          <input
-            type="text"
-            onChange={handleInputChange}
-            className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-            placeholder="title of your epic video"
-            name="name"
-            value={inputValue.name}
-            required
-          />
-          <label
-            className="font-bold"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            Cover Image
-          </label>
-          <div
-            className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer hover:border-purple-300 hover:bg-gray-100"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleImageFileChange}
-          >
-            <input
-              type="file"
-              onChange={handleImageFileChange}
-              className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-              name="file"
-              required
-            />
-          </div>
-
-          {videoInserted && uploadedOntoIpfs ? (
-            <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
-              Uploaded onto ipfs! - {contentIpfsHash}
-            </h1>
-          ) : videoInserted ? (
-            <h1 className="text-center">Uploading onto ipfs...</h1>
-          ) : (
-            <h1 />
-          )}
-
-          <label
-            className="font-bold"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            Keywords
-          </label>
-          <div className="flex">
-  <input
-    type="text"
-    onChange={handleKeywordChange}
-    className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5 mr-2"
-    placeholder="add one Keyword at a time"
-    value={keyword}
-    required
-  />
-  <button
-    type="button"
-    onClick={addKeyword}
-    className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  >
-    Add <AiFillPlusCircle className="ml-2" />
-  </button>
+        <div className="w-full md:w-1/2">
+          <h1 className="font-bold font-montserrat text-3xl text-left pl-0">
+            Upload
+          </h1>
+          <h1 className="font-bold font-montserrat text-l text-left pl-0">
+Create. Discover. Share.          </h1>
+          <div className="w-3/4">
+  <div className="my-4">
+    <Image src={Upload} alt="Upload" />
+  </div>
 </div>
-
-<ul>
-  {inputValue.listOfKeywords.map((keyword, index) => (
-    <li key={index} className="mb-2 text-lg">
-      <div className="rounded-full bg-gray-200 px-4 py-2 inline-flex items-center">
-        {keyword}
-        <button
-          className="ml-2"
-          onClick={() => deleteKeyword(keyword)}
-        >
-          <AiFillCloseCircle />
-        </button>
-      </div>
-    </li>
-  ))}
-</ul>
-
-        </form>
-        
-        <button
-          onClick={createMetadata}
-          className="border-2 border-black p-2 rounded-lg hover:bg-black hover:text-white hover:ease-in-out-800 transition"
-        >
-          Create metadata URI
-        </button>
         </div>
 
-
-        <h1>{metadataURI}</h1>
-
-        {metadataURI &&
-          inputValue.name &&
-          inputValue.contentIpfsHash &&
-          inputValue.listOfKeywords.length > 0 && (
-            <button
-              onClick={createVideo}
-              className="text-white bg-pink-500 p-2 rounded-lg hover:animate-pulse hover:opacity-80 mt-5"
+        <div className="w-full md:w-1/2">
+          <form>
+            <label
+              className="font-bold"
+              style={{ display: "flex", alignItems: "center" }}
             >
-              Create Video!
-            </button>
-          )}
+              Video Title
+            </label>
 
-        {metadataURI &&
-          !(
+            <input
+              type="text"
+              onChange={handleInputChange}
+              className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+              placeholder="title of your epic video"
+              name="name"
+              value={inputValue.name}
+              required
+            />
+            <label
+              className="font-bold"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              Cover Image
+            </label>
+            <div
+              className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer hover:border-green-300 hover:bg-gray-100"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={handleImageFileChange}
+            >
+              <input
+                type="file"
+                onChange={handleImageFileChange}
+                className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+                name="file"
+                required
+              />
+            </div>
+
+            {videoInserted && uploadedOntoIpfs ? (
+              <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
+                Uploaded onto ipfs! - {contentIpfsHash}
+              </h1>
+            ) : videoInserted ? (
+              <h1 className="text-center">Uploading onto ipfs...</h1>
+            ) : (
+              <h1 />
+            )}
+
+            <label
+              className="font-bold"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              Keywords
+            </label>
+            <div className="flex">
+              <input
+                type="text"
+                onChange={handleKeywordChange}
+                className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5 mr-2"
+                placeholder="add one Keyword at a time"
+                value={keyword}
+                required
+              />
+              <button
+                type="button"
+                onClick={addKeyword}
+                className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Add <AiFillPlusCircle className="ml-2" />
+              </button>
+            </div>
+
+            <ul>
+              {inputValue.listOfKeywords.map((keyword, index) => (
+                <li key={index} className="mb-2 text-lg">
+                  <div className="rounded-full bg-gray-200 px-4 py-2 inline-flex items-center">
+                    {keyword}
+                    <button
+                      className="ml-2"
+                      onClick={() => deleteKeyword(keyword)}
+                    >
+                      <AiFillCloseCircle />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </form>
+
+          <button
+            onClick={createMetadata}
+            className="border-2 border-black p-2 rounded-lg hover:bg-black hover:text-white hover:ease-in-out-800 transition"
+          >
+            Create metadata URI
+          </button>
+
+          <h1>{metadataURI}</h1>
+
+          {metadataURI &&
             inputValue.name &&
             inputValue.contentIpfsHash &&
-            inputValue.listOfKeywords.length > 0
-          ) && (
-            <p className="text-red-500">
-              Please fill in all fields before creating the video.
-            </p>
-          )}
+            inputValue.listOfKeywords.length > 0 && (
+              <button
+                onClick={createVideo}
+                className="text-white bg-pink-500 p-2 rounded-lg hover:animate-pulse hover:opacity-80 mt-5"
+              >
+                Create Video!
+              </button>
+            )}
+
+          {metadataURI &&
+            !(
+              inputValue.name &&
+              inputValue.contentIpfsHash &&
+              inputValue.listOfKeywords.length > 0
+            ) && (
+              <p className="text-red-500">
+                Please fill in all fields before creating the video.
+              </p>
+            )}
+        </div>
       </div>
     </div>
   );
