@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AiFillHome, AiOutlineMenu, AiOutlineUpload } from 'react-icons/ai';
+import { AiFillHome, AiOutlineMenu,  AiOutlineUpload } from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im';
 import Profile from './Profile';
 
@@ -10,17 +10,13 @@ interface SidebarProps {
   isAuthenticated: boolean;
 }
 
+
 const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
   const [displaySidebar, setDisplaySidebar] = useState(true);
   const { pathname } = useRouter();
   const activeLink =
     'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#F51997] rounded';
-  const normalLink =
-    'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded';
-
-  const handleProfileClick = () => {
-    setDisplaySidebar(true); // Ensure that the sidebar is displayed when profile is clicked
-  };
+  const normalLink = 'flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold rounded';
 
   return (
     <div>
@@ -44,12 +40,8 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
           </div>
           {isAuthenticated && (
             <>
-              <div
-                className={pathname === '/profile' ? activeLink : normalLink}
-                onClick={handleProfileClick}
-              >
+              <div className={pathname === '/profile' ? activeLink : normalLink}>
                 <Profile />
-                <span className="capitalize font-montserrat text-xl hidden xl:block">Profile</span>
               </div>
               <Link href="/upload">
                 <div className={pathname === '/upload' ? activeLink : normalLink}>
