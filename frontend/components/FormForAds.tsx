@@ -272,8 +272,8 @@ const FormForAds = () => {
               <button
                 type="button"
                 onClick={addKeyword}
-                className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
+                className="flex items-center h-11 border-2 border-purple-600 p-2 bg-purple-400  text-white rounded-lg hover:bg-purple-600 hover:text-white hover:ease-in-out-800 transition"
+                >
                 Add <AiFillPlusCircle className="ml-2" />
               </button>
             </div>
@@ -306,10 +306,11 @@ const FormForAds = () => {
               value={inputValue.stakeAmount}
               required
             />
+
             <button
               type="button"
               onClick={handleCreateAdvertisement}
-              className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="border-2 border-purple-600 p-2 bg-purple-400 text-white rounded-full hover:bg-purple-600 hover:text-white hover:ease-in-out-800 transition"
               disabled={transactionProcessing}
             >
               {transactionProcessing ? "Processing..." : "Create Ad"}

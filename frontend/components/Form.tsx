@@ -285,7 +285,7 @@ const Form = () => {
               <button
                 type="button"
                 onClick={addKeyword}
-                className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="flex items-center h-11 border-2 border-green-600 p-2 bg-green-400 text-white rounded-lg hover:bg-purple-green hover:text-white hover:ease-in-out-800 transition"
               >
                 Add <AiFillPlusCircle className="ml-2" />
               </button>
@@ -310,8 +310,8 @@ const Form = () => {
 
           <button
             onClick={createMetadata}
-            className="border-2 border-black p-2 rounded-lg hover:bg-black hover:text-white hover:ease-in-out-800 transition"
-          >
+            className="h-11 border-2 border-green-600 p-2 bg-green-400 text-white rounded-full hover:bg-purple-green hover:text-white hover:ease-in-out-800 transition"
+            >
             Create metadata URI
           </button>
 

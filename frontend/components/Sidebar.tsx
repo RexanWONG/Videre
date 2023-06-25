@@ -63,7 +63,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                   <p className="text-2xl">
                     <RiAdvertisementLine />
                   </p>
-                  <span className="capitalize font-montserrat text-xl hidden xl:block">Upload</span>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Ads</span>
                 </div>
               </Link>
             </>

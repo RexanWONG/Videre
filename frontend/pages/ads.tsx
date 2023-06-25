@@ -8,7 +8,7 @@ import {NoRegister} from '../components';
 
 const UploadAds = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [isRegistered, setIsRegistered] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(true)
 
    const options = {
      dappMetadata: { name: "My Dapp", url: "https://mydapp.com" },
