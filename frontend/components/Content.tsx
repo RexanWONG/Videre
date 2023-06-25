@@ -10,7 +10,6 @@ const Content = () => {
     const contractABI = abi.abi;
     const [videreContract, setVidereContract] = useState(null);
     const [videos, setVideos] = useState([]); 
-    const [videosLikeInfo, setVideosLikeInfo] = useState([]); 
 
     const getVideosWithLikes = async () => {
         try {

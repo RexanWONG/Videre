@@ -64,7 +64,7 @@ const UploadAds = () => {
   return (
     <div>
 
-      {!isRegistered ? (
+      {isRegistered ? (
         <>
           <FormForAds />
         </>
