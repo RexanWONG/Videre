@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import { AiFillHome, AiOutlineMenu,  AiOutlineUpload, AiOutlineUser } from 'react-icons/ai';
 import { RiAdvertisementLine } from 'react-icons/ri'
 import { ImCancelCircle } from 'react-icons/im';
+import { PiHandshake } from 'react-icons/pi'
 import Profile from './Profile';
 
 interface SidebarProps {
   isAuthenticated: boolean;
 }
-
 
 const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
   const [displaySidebar, setDisplaySidebar] = useState(true);
@@ -54,7 +54,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                   <p className="text-2xl">
                     <AiOutlineUpload />
                   </p>
-                  <span className="capitalize font-montserrat text-xl hidden xl:block">Upload</span>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Upload Content</span>
                 </div>
               </Link>
 
@@ -63,7 +63,16 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                   <p className="text-2xl">
                     <RiAdvertisementLine />
                   </p>
-                  <span className="capitalize font-montserrat text-xl hidden xl:block">Ads</span>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Create ad</span>
+                </div>
+              </Link>
+
+              <Link href="/match">
+                <div className={pathname === '/ads' ? activeLink : normalLink}>
+                  <p className="text-2xl">
+                    <PiHandshake />
+                  </p>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">match ads w/ vids</span>
                 </div>
               </Link>
             </>

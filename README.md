@@ -2,13 +2,14 @@
 - Live link: 
 - Demo video:
 
-Videre is a video-sharing platform for content creators to earn rewards by sharing their videos to real users & advertisers. 
+Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with users & advertisers. By leveraging token bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
 
-**Creators** redeem crypto for the videos they upload. The more engagement, the more crypto they earn. Their videos are uploaded as NFTs (token bound accounts), which are able to accept tokens as payment for showing the ads. 
+**Creators** can redeem crypto for the videos they upload, with the amount determined by the number of likes their content receives. The platform's user base consists of real users, verified by Worldcoin ID, who engage with the content. Verified Worldcoin ID creators also receive more crypto, which incentivizes all users to prove they’re human. This ensures creators build authentic relationships with their audience and prevents the presence of bots.
 
 **Advertisers** send crypto to Videre's smart contract, which are redeemed by creators' video NFTs when desired. Through keywords submitted during the upload process, ads are matched with the appropriate videos. Advertisers also specify how much a content creator gets for every 1000 likes.
 
-**Users** scroll through high-quality TikTok-style videos, 
+Twitter is full of bots. TikTok's algorithm + data is private and they're getting banned everywhere. Some platforms also have censorship rules. Most of them pay their creators poorly. Videre solves these problems.
+
 
 # How it works 🧠
 1. Content creator uploads a video as an NFT (ERC-721)

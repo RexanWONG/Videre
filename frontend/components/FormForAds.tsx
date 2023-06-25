@@ -246,7 +246,7 @@ const FormForAds = () => {
 
             {videoInserted && uploadedOntoIpfs ? (
               <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
-                Uploaded onto ipfs! - {contentIpfsHash}
+                Uploaded onto ipfs! - {inputValue.contentIpfsHash}
               </h1>
             ) : videoInserted ? (
               <h1 className="text-center">Uploading onto ipfs...</h1>
