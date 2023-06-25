@@ -8,6 +8,7 @@ import pfp from "../assets/pfp.png";
 import { MetaMaskSDK } from '@metamask/sdk';
 import { ethers } from 'ethers'
 import abi from '../components/data/Videre.json'
+import truncateEthAddress from "truncate-eth-address";
 
 const Profile = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -19,12 +20,33 @@ const Profile = () => {
     dappMetadata: { name: "My Dapp", url: "https://mydapp.com" },
     injectProvider: true
   };
+
   const MMSDK = new MetaMaskSDK(options);
   const ethereum = MMSDK.getProvider();
 
   const contractAddress = "0x0784405c4438fc61f013fD00Eaabb1962c5952e9";
   const contractABI = abi.abi;
   const [videreContract, setVidereContract] = useState(null);
+
+  const [inputValue, setInputValue] = useState({
+    username: "",
+    isAdvitiser: true,
+  });
+
+  const handleInputChange = (event) => {
+    setInputValue((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleRoleChange = (role) => {
+    setInputValue(prevState => ({
+      ...prevState,
+      isAdvitiser: role === "Adviser"
+    }));
+  };
+
 
   const handlePopup = () => {
     setShowPopup(!showPopup);
@@ -127,14 +149,50 @@ const Profile = () => {
                     <h1 className="text-xl font-bold font-montserrat">9473</h1>
             </div>
             <div className="w-full md:w-1/2">
-              <Card />
+              <Card address={truncateEthAddress(currentAccount)}/>
             </div>
           </div>
         </div>
       ) : (
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold">You need to register an account</h1>
+          <label
+              className="font-bold mt-16"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              Username
+            </label>
+
+            <input
+              type="text"
+              onChange={handleInputChange}
+              className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+              placeholder="epic username"
+              name="username"
+              value={inputValue.username}
+              required
+            />
+
+            <label className="font-bold mt-5">Role</label>
+              <div className="mt-2">
+                <button
+                  onClick={() => handleRoleChange("Content Creator")}
+                  className={`py-2 px-4 rounded ${inputValue.isAdvitiser ? '' : 'bg-blue-500 text-white'}`}
+                >
+                  Content Creator
+                </button>
+                <button
+                  onClick={() => handleRoleChange("Adviser")}
+                  className={`ml-3 py-2 px-4 rounded ${inputValue.isAdvitiser ? 'bg-blue-500 text-white' : ''}`}
+                >
+                  Adviser
+                </button>
+              </div>
+
+              <p className="mt-5 font-bold">You picked: {inputValue.isAdvitiser ? "Adviser" : "Content Creator"}</p>
+
         </div>
+        
       )}
     </div>
   );
