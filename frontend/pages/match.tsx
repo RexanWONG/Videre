@@ -33,12 +33,16 @@ const match = () => {
   }, []);
 
   return (
+<<<<<<< Updated upstream
     <div className='flex flex-col items-center justify-center'>
         <h1 className='text-4xl font-bold'>
            Ads with Content
         </h1>
         <p>Connect your ads with user content.  Get recgonition, stake some MATIC</p>
     </div>
+=======
+   <h1>s</h1> 
+>>>>>>> Stashed changes
   )
 }
 

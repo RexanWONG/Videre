@@ -72,7 +72,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                   <p className="text-2xl">
                     <PiHandshake />
                   </p>
-                  <span className="capitalize font-montserrat text-xl hidden xl:block">match ads w/ vids</span>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Match</span>
                 </div>
               </Link>
             </>

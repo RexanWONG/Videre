@@ -53,3 +53,16 @@ radial-gradient(at 67% 96%, hsla(0,97%,75%,1) 0px, transparent 50%);
   flex-basis: calc(50% - 20px); /* Adjust the width as needed */
   margin: 10px;
 }
+
+button:hover .rotate {
+  animation: spin 2s infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
