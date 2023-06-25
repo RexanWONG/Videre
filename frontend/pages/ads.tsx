@@ -4,6 +4,7 @@ import Head from "next/head";
 import { ethers } from "ethers";
 import abi from '../components/data/Videre.json'
 import { MetaMaskSDK } from '@metamask/sdk';
+import {NoRegister} from '../components';
 
 const UploadAds = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -64,14 +65,13 @@ const UploadAds = () => {
   return (
     
     <div>
-
       {isRegistered ? (
         <>
           <FormForAds />
         </>
       ) : (
-        <h1>You are not registered yet.  Please register</h1>
-      )}
+        <NoRegister />
+            )}
     </div>
   );
 };
