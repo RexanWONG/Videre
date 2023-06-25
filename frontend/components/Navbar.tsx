@@ -84,11 +84,13 @@ const Navbar = () => {
             <p className="font-bold font-raleway">
               {truncateEthAddress(currentAccount)}
             </p>
+            
           </div>
 
         </div>
         )}
       </div>
+      
     </div>
   );
 };
