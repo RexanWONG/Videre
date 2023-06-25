@@ -45,7 +45,7 @@ const UploadAds = () => {
       try {
         if (videreContract) {
           const userInfo = await videreContract.getContentCreatorInfo(currentAccount);
-          if (userInfo[6] == true) {
+          if (userInfo[5] == true) {
             setIsRegistered(true)
           } else {
             setIsRegistered(false)
