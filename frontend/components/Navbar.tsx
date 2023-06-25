@@ -85,7 +85,6 @@ const Navbar = () => {
               {truncateEthAddress(currentAccount)}
             </p>
           </div>
-          {currentAccount && <Card address={currentAccount} />}
 
         </div>
         )}

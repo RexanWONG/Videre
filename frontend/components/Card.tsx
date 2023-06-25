@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
+interface CardProps {
+  address: string; // Define the prop for the address
+}
 
-const Card = () => {
+const Card = ({ address }: CardProps) => {
   
   return (
         <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
@@ -17,7 +20,7 @@ const Card = () => {
               </div>
               <div>
                 <p className="text-white font-light text-sm">
-                  {/* {shortenAddress(currentAccount)} */}
+                <p className="text-white font-light text-sm">{address}</p> {/* Use the address prop */}
                 </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
