@@ -44,7 +44,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
              <Link href="/upload">
                 <div className={pathname === '/profile' ? activeLink : normalLink}>
                   <p className="text-2xl">
-                    
+                  <AiOutlineUser />
                   </p>
                   <span className="capitalize font-montserrat text-xl hidden xl:block">Profile</span>
                 </div>
