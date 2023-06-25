@@ -317,10 +317,15 @@ const Form = () => {
 
           <h1>{metadataURI}</h1>
 
+          <button
+                onClick={createVideo}
+                className="text-white bg-pink-500 p-2 rounded-lg hover:animate-pulse hover:opacity-80 mt-5"
+              >
+                Create Video!
+              </button>
+
           {metadataURI &&
-            inputValue.name &&
-            inputValue.contentIpfsHash &&
-            inputValue.listOfKeywords.length > 0 && (
+            inputValue.name && (
               <button
                 onClick={createVideo}
                 className="text-white bg-pink-500 p-2 rounded-lg hover:animate-pulse hover:opacity-80 mt-5"
@@ -329,7 +334,7 @@ const Form = () => {
               </button>
             )}
 
-          {metadataURI &&
+          {/* {metadataURI &&
             !(
               inputValue.name &&
               inputValue.contentIpfsHash &&
@@ -338,7 +343,7 @@ const Form = () => {
               <p className="text-red-500">
                 Please fill in all fields before creating the video.
               </p>
-            )}
+            )} */}
         </div>
       </div>
     </div>

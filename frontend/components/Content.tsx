@@ -29,7 +29,8 @@ const Content = () => {
                     ...video,
                     likes: videoLikeInfo[0].toString(), // Assuming the first element of videoLikeInfo is the number of likes
                     likedBy: videoLikeInfo[1], // Assuming the second element of videoLikeInfo is the list of addresses who liked the video
-                    adIpfsContent: ad[3]
+                    adIpfsContent: ad[3],
+                    adName: ad[1]
                 });
             }
     
@@ -116,6 +117,7 @@ const Content = () => {
                         </div>
 
                         <div className='flex flex-col items-start justify-start'>
+                            <h1>ADVERTISEMENTS : </h1>
                             <div className="border-2 border-gray-400 rounded-lg">
                                 <ReactPlayer 
                                     url={`https://ipfs.io/ipfs/${video.adIpfsContent}`}
@@ -124,6 +126,7 @@ const Content = () => {
                                     height="300px"
                                 />
                             </div>
+                            <h1 className='text-3xl font-bold'>{video.adName}</h1>
                         </div>
                     </div>
                 </div>
