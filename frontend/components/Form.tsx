@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { ethers } from "ethers";
 import { AiFillPlusCircle, AiFillCloseCircle } from "react-icons/ai";
+import { BiCloudUpload } from "react-icons/bi";
 import abi from "../components/data/Videre.json";
 import Upload from "../assets/upload.jpg";
 import Image from "next/image";
@@ -13,7 +14,7 @@ const Form = () => {
   const [metadataURI, setMetadataURI] = useState("");
   const [contentIpfsHash, setContentIpfsHash] = useState("");
 
-  const contractAddress = "0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0";
+  const contractAddress = "0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d";
   const contractABI = abi.abi;
   const [videreContract, setVidereContract] = useState(null);
 
@@ -162,12 +163,13 @@ const Form = () => {
             Upload
           </h1>
           <h1 className="font-bold font-montserrat text-l text-left pl-0">
-Create. Discover. Share.          </h1>
+            Create. Discover. Share.{" "}
+          </h1>
           <div className="w-3/4">
-  <div className="my-4">
-    <Image src={Upload} alt="Upload" />
-  </div>
-</div>
+            <div className="my-4">
+              <Image src={Upload} alt="Upload" />
+            </div>
+          </div>
         </div>
 
         <div className="w-full md:w-1/2">
@@ -194,19 +196,18 @@ Create. Discover. Share.          </h1>
             >
               Cover Image
             </label>
-            <div
-              className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer hover:border-green-300 hover:bg-gray-100"
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={handleImageFileChange}
-            >
-              <input
-                type="file"
-                onChange={handleImageFileChange}
-                className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-                name="file"
-                required
-              />
-            </div>
+       <div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer hover:border-green-300 hover:bg-gray-100">
+  <div className="flex items-center justify-center bg-gray-200 rounded-full w-16 h-16 mb-5">
+    <BiCloudUpload size={48} />
+  </div>
+  <input
+    type="file"
+    onChange={handleImageFileChange}
+    className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+    name="file"
+    required
+  />
+</div>
 
             {videoInserted && uploadedOntoIpfs ? (
               <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
