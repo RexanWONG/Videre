@@ -21,12 +21,15 @@ const Content = () => {
             for (let i = 0 ; i < numberOfVideos ; i++) {
                 const video = await videreContract.getVideo(i);
                 const videoLikeInfo = await videreContract.getVideoLikesInfo(i);
+
+                const ad = await videreContract.getAdvertisement(i)
     
                 // Combine video and likes info into one object
                 videoList.push({
                     ...video,
                     likes: videoLikeInfo[0].toString(), // Assuming the first element of videoLikeInfo is the number of likes
-                    likedBy: videoLikeInfo[1] // Assuming the second element of videoLikeInfo is the list of addresses who liked the video
+                    likedBy: videoLikeInfo[1], // Assuming the second element of videoLikeInfo is the list of addresses who liked the video
+                    adIpfsContent: ad[3]
                 });
             }
     
@@ -36,6 +39,13 @@ const Content = () => {
             console.error(error);
         }
     };
+
+    // const getAd = async (id) => {
+    //     const ad = await videreContract.getAdvertisement(id)
+
+    //     return ad[3];
+
+    // }
     
     // Update the useEffect hook
     useEffect(() => {
@@ -110,8 +120,18 @@ const Content = () => {
                                 <button onClick={() => likeVideo(video[0])}>
                                     <AiOutlineHeart size={50} color='black' className='hover:bg-red-500'/>
                                 </button>
+                            </div> 
+                        </div>
+
+                        <div className='flex flex-col items-start justify-start'>
+                            <div className="border-2 border-gray-400 rounded-lg">
+                                <ReactPlayer 
+                                    url={`https://ipfs.io/ipfs/${video.adIpfsContent}`}
+                                    controls={true}
+                                    width="400px"
+                                    height="700px"
+                                />
                             </div>
-                            
                         </div>
                     </div>
                 </div>
