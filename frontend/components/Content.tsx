@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import abi from '../components/data/Videre.json';
-
+import truncateEthAddress from 'truncate-eth-address'
 
 const Content = () => {
     const contractAddress = '0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d'; 
@@ -22,7 +22,7 @@ const Content = () => {
             }
 
             console.log(videoList);
-            setVideos(videoList); // <--- Add this line
+            setVideos(videoList); 
         } catch (error) {
             console.error(error);
         }
@@ -51,13 +51,21 @@ const Content = () => {
             </button>
 
             <div>
-                {videos.map((item, index) => ( // <--- Change this line
+                {videos.map((item, index) => (
                     <div key={index}>
-                        <h1 className='text-4xl font-bold'>{item[1]}</h1>
-                        <p>BY {item[2]}</p>
+                    <h1 className='text-4xl font-bold'>{item[1]}</h1>
+                    <p className='text-gray-500'>By {truncateEthAddress(item[2])}</p>
+
+                    <div>
+                        <video width="320" height="240" controls>
+                        <source src={`https://ipfs.io/ipfs/${item[3]}`} type="video/mov" />
+                        Your browser does not support the video tag.
+                        </video>
+                    </div>
                     </div>
                 ))}
-            </div>
+                </div>
+
         </div>
     );
 }
