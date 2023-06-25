@@ -154,7 +154,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
-        uint256 count = 0;
+        uint256 count = 0; 
 
         for (uint256 i = 0 ; i < video.listOfAdvertisementsLinked.length ; ++i) {
             if (video.listOfAdvertisementsLinked[i] == _advertisementId) {
