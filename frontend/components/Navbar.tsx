@@ -6,6 +6,8 @@ import { IoMdAdd } from "react-icons/io";
 import { MetaMaskSDK } from "@metamask/sdk";
 import truncateEthAddress from "truncate-eth-address";
 import { FaWallet} from "react-icons/fa";
+import Card from "./Card"; // Import the Card component
+
 
 const Navbar = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -76,14 +78,16 @@ const Navbar = () => {
             Connect Wallet
           </button>
         ) : (
-                   <div className="flex items-center gap-2">
-            <FaWallet/>
-            <div className="rounded-md border border-gray-300 p-2">
-              <p className="font-bold font-raleway">
-                {truncateEthAddress(currentAccount)}
-              </p>
-            </div>
+          <div className="flex items-center gap-2">
+          <FaWallet/>
+          <div className="rounded-md border border-gray-300 p-2">
+            <p className="font-bold font-raleway">
+              {truncateEthAddress(currentAccount)}
+            </p>
           </div>
+          {currentAccount && <Card address={currentAccount} />}
+
+        </div>
         )}
       </div>
     </div>

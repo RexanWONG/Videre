@@ -197,7 +197,7 @@ const Form = () => {
           <h1 className="font-bold font-montserrat text-3xl text-left pl-0">
             Upload
           </h1>
-          <h1 className="font-bold font-montserrat text-l text-left pl-0">
+          <h1 className="font-bold font-montserrat text-l text-left pl-0 text-gray-500">
             Create. Discover. Share.{" "}
           </h1>
           <div className="w-3/4">
