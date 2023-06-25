@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// POLYGON MUMBAI : 0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0
+// POLYGON MUMBAI : 0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d
 pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -154,7 +154,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 
-        uint256 count = 0; 
+        uint256 count = 0;
 
         for (uint256 i = 0 ; i < video.listOfAdvertisementsLinked.length ; ++i) {
             if (video.listOfAdvertisementsLinked[i] == _advertisementId) {
@@ -250,6 +250,10 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
             _videos[_videoId].numOfLikes, 
             _videos[_videoId].likedAddresses
         );
+    }
+
+    function getNumbers() public view returns (uint256, uint256, uint256) {
+        return (numofAdvertisements, numOfVideos, numOfContentCreators);
     }
 
     // The following functions are overrides required by Solidity.
