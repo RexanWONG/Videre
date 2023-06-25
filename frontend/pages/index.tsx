@@ -1,6 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
-import { Banner, Card } from '../components';
+import { Banner, Card, Content } from '../components';
 import Head from 'next/head';
 
 const Home: NextPage = () => {
@@ -10,6 +10,7 @@ const Home: NextPage = () => {
         <title>Videre™</title>
       </Head>
       <Banner />
+      <Content />
       
     </div>
   );
