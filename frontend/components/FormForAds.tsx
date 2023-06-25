@@ -16,6 +16,7 @@ const FormForAds = () => {
   const [keyword, setKeyword] = useState("");
   const [transactionProcessing, setTransactionProcessing] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [contentIpfsHash, setContentIpfsHash] = useState('')
 
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -72,7 +73,7 @@ const FormForAds = () => {
       setVideoInserted(true);
       try {
         const ipfsData = await uploadImageOntoIpfs(event.target.files[0]);
-        inputValue.contentIpfsHash = ipfsData.path;
+        setContentIpfsHash(ipfsData.path)
         setUploadedOntoIpfs(true);
       } catch (error) {
         console.log(error);
@@ -122,7 +123,7 @@ const FormForAds = () => {
     try {
       const transaction = await videreContract.createAdvertisement(
         inputValue.name,
-        inputValue.contentIpfsHash,
+        contentIpfsHash,
         inputValue.listOfKeywords,
         ethers.utils.parseEther(inputValue.stakeAmount.toString()),
         {
@@ -246,7 +247,7 @@ const FormForAds = () => {
 
             {videoInserted && uploadedOntoIpfs ? (
               <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
-                Uploaded onto ipfs! - {inputValue.contentIpfsHash}
+                Uploaded onto ipfs! - {contentIpfsHash}
               </h1>
             ) : videoInserted ? (
               <h1 className="text-center">Uploading onto ipfs...</h1>
