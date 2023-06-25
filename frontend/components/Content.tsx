@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 import { AiOutlineHeart } from 'react-icons/ai'
 
 const Content = () => {
-    const contractAddress = '0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d'; 
+    const contractAddress = '0x0784405c4438fc61f013fD00Eaabb1962c5952e9'; 
     const contractABI = abi.abi;
     const [videreContract, setVidereContract] = useState(null);
     const [videos, setVideos] = useState([]); 
