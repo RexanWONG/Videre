@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { ethers } from "ethers";
 import { AiFillPlusCircle, AiFillCloseCircle } from "react-icons/ai";
@@ -140,6 +140,9 @@ const Form = () => {
     }
   };
 
+  const [isDragOver, setIsDragOver] = useState(false);
+
+
   useEffect(() => {
     const initEthereum = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -154,6 +157,38 @@ const Form = () => {
 
     initEthereum();
   }, []);
+
+
+  const handleDrop = async (event) => {
+    event.preventDefault();
+    setIsDragOver(false); // Reset the drag-over state
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      setVideoInserted(true);
+      try {
+        const ipfsData = await uploadImageOntoIpfs(file);
+        setContentIpfsHash(ipfsData.path);
+        inputValue.contentIpfsHash = ipfsData.path;
+        setUploadedOntoIpfs(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+  const handleDragLeave = (event) => {
+    event.preventDefault();
+    setIsDragOver(false); // Reset the drag-over state
+  };
+
+
+  const fileInputRef = useRef(null);
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
 
   return (
     <div className="flex flex-col items-center justify-center font-raleway">
@@ -191,23 +226,36 @@ const Form = () => {
               required
             />
             <label
+            id="fileInput"
               className="font-bold"
               style={{ display: "flex", alignItems: "center" }}
             >
               Cover Image
             </label>
-       <div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer hover:border-green-300 hover:bg-gray-100">
-  <div className="flex items-center justify-center bg-gray-200 rounded-full w-16 h-16 mb-5">
-    <BiCloudUpload size={48} />
-  </div>
-  <input
-    type="file"
-    onChange={handleImageFileChange}
-    className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-    name="file"
-    required
-  />
-</div>
+            <div
+        className={`border-dashed rounded-xl border-4 ${
+          isDragOver ? "border-green-300 hover:bg-gray-100" : "border-gray-200"
+        } flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer`}
+        onClick={handleUploadClick}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+      <div className="flex items-center justify-center bg-gray-200 rounded-full w-16 h-16 mb-5">
+        <BiCloudUpload size={48} />
+      </div>
+      <h1 className="text-center">Upload or drag your cover image file.</h1>
+      <input
+        ref={fileInputRef}
+        id="fileInput"
+        type="file"
+        accept="video/*"
+        onChange={handleImageFileChange}
+        className="hidden"
+        name="file"
+        required
+      />
+    </div>
 
             {videoInserted && uploadedOntoIpfs ? (
               <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
