@@ -1,5 +1,6 @@
 # Videre 🎥 | ETHGlobal Waterloo 2023 Project
 Demo Link: https://ethglobal.com/showcase/videre-wk314
+Built by Donghwui Kim, Rexan Wong, Duncan Wong, Matt Wong
 
 Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with content creators and advertisers. By leveraging token-bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token-bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
 
