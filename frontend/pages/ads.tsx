@@ -62,6 +62,7 @@ const UploadAds = () => {
   }, []);
 
   return (
+    
     <div>
 
       {isRegistered ? (

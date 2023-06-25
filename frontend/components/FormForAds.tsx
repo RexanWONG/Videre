@@ -1,25 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { ethers } from 'ethers'
-import abi from '../components/data/Videre.json'
+import React, { useState, useEffect, useRef } from "react";
+import { ethers } from "ethers";
+import abi from "../components/data/Videre.json";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { AiFillPlusCircle, AiFillCloseCircle } from "react-icons/ai";
 import { BiCloudUpload } from "react-icons/bi";
+import Ads from  "../assets/ads.jpg";
+import Image from "next/image";
 
 const FormForAds = () => {
-  const contractAddress = '0x0784405c4438fc61f013fD00Eaabb1962c5952e9' 
-  const contractABI = abi.abi
+  const contractAddress = "0x0784405c4438fc61f013fD00Eaabb1962c5952e9";
+  const contractABI = abi.abi;
   const [videreContract, setVidereContract] = useState(null);
   const [uploadedOntoIpfs, setUploadedOntoIpfs] = useState(false);
   const [videoInserted, setVideoInserted] = useState(false);
-  const [keyword, setKeyword] = useState(""); 
+  const [keyword, setKeyword] = useState("");
   const [transactionProcessing, setTransactionProcessing] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const [inputValue, setInputValue] = useState({
     name: "",
     contentIpfsHash: "",
     listOfKeywords: [],
-    stakeAmount: 0
+    stakeAmount: 0,
   });
+
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
 
   const projectId = "2QNLEpmDovfuhyECwyNGxTgRiFw";
   const projectSecretKey = "d01edfd18724a5ba82922e0e92dedcbf";
@@ -72,6 +79,7 @@ const FormForAds = () => {
       }
     }
   };
+  const fileInputRef = useRef(null);
 
   const handleKeywordChange = (event) => {
     setKeyword(event.target.value);
@@ -118,7 +126,7 @@ const FormForAds = () => {
         inputValue.listOfKeywords,
         ethers.utils.parseEther(inputValue.stakeAmount.toString()),
         {
-          value: ethers.utils.parseEther(inputValue.stakeAmount.toString())
+          value: ethers.utils.parseEther(inputValue.stakeAmount.toString()),
         }
       );
 
@@ -126,9 +134,9 @@ const FormForAds = () => {
       setTransactionProcessing(false);
 
       if (transactionResult.status === 1) {
-        alert('Advertisement created successfully');
+        alert("Advertisement created successfully");
       } else {
-        alert('Transaction failed');
+        alert("Transaction failed");
       }
     } catch (error) {
       console.log(error);
@@ -136,7 +144,29 @@ const FormForAds = () => {
     }
   };
 
-
+  const handleDrop = async (event) => {
+    event.preventDefault();
+    setIsDragOver(false); // Reset the drag-over state
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      setVideoInserted(true);
+      try {
+        const ipfsData = await uploadImageOntoIpfs(file);
+        setContentIpfsHash(ipfsData.path);
+        inputValue.contentIpfsHash = ipfsData.path;
+        setUploadedOntoIpfs(true);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+  const handleDragLeave = (event) => {
+    event.preventDefault();
+    setIsDragOver(false); // Reset the drag-over state
+  };
 
   useEffect(() => {
     const initEthereum = async () => {
@@ -154,43 +184,77 @@ const FormForAds = () => {
   }, []);
 
   return (
-    <div>
-      <form>
-        <label>
-          Name of ad
-        </label>
+    <div className="flex flex-col items-center justify-center font-raleway">
+      <div className="flex flex-col md:flex-row w-full">
+        <div className="w-full md:w-1/2">
+          <h1 className="font-bold font-montserrat text-3xl text-left pl-0">
+            Advertisement
+          </h1>
+          <h1 className="font-bold font-montserrat text-l text-left pl-0 text-gray-500">
+            A solution for everyone.{" "}
+          </h1>
+          <div className="w-3/4">
+            <div className="my-4">
+              <Image src={Ads} alt="Ads" />
+            </div>
+          </div>
+        </div>
 
-        <input
-          type="text"
-          onChange={handleInputChange}
-          className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-          placeholder="title of your epic ad"
-          name="name"
-          value={inputValue.name}
-          required
-        />
+        <div className="w-full md:w-1/2">
+          <form>
+            <label className="font-bold">Name of ad</label>
 
-        <label>
-          Select a video/image for ad
-        </label>
-        <input  
-            type="file"
-            onChange={handleImageFileChange}
-            className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5" 
-            name="file"
-        />
+            <input
+              type="text"
+              onChange={handleInputChange}
+              className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+              placeholder="title of your epic ad"
+              name="name"
+              value={inputValue.name}
+              required
+            />
 
-        {uploadedOntoIpfs ? (
-          <h1 className='text-green-600 mb-5'>Uploaded onto ipfs! - {inputValue.contentIpfsHash}</h1>
-        ) : (
-          videoInserted ? (
-            <h1>Uploading onto ipfs...</h1>
-          ) : (
-            <h1 />
-          )
-        )}
-        
-        <label
+            <label className="font-bold">Ad Video</label>
+            <div
+              className={`border-dashed rounded-xl border-4 ${
+                isDragOver
+                  ? "border-green-300 hover:bg-gray-100"
+                  : "border-gray-200"
+              } flex flex-col justify-center items-center outline-none mt-1 w-[280px] h-[200px] p-10 cursor-pointer`}
+              onClick={handleUploadClick}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <div className="flex items-center justify-center bg-gray-200 rounded-full w-16 h-16 mb-5">
+                <BiCloudUpload size={48} />
+              </div>
+              <h1 className="text-center">
+                Upload or drag your ad video file.
+              </h1>
+              <input
+                ref={fileInputRef}
+                id="fileInput"
+                name="file"
+                type="file"
+                accept="image/*, video/*"
+                onChange={handleImageFileChange}
+                className="hidden"
+                required
+              />
+            </div>
+
+            {videoInserted && uploadedOntoIpfs ? (
+              <h1 className="text-green-600 mb-2 text-center whitespace-normal flex-wrap">
+                Uploaded onto ipfs! - {contentIpfsHash}
+              </h1>
+            ) : videoInserted ? (
+              <h1 className="text-center">Uploading onto ipfs...</h1>
+            ) : (
+              <h1 />
+            )}
+
+            <label
               className="font-bold"
               style={{ display: "flex", alignItems: "center" }}
             >
@@ -230,32 +294,31 @@ const FormForAds = () => {
               ))}
             </ul>
 
-            <label>
-          Stake Amount
-        </label>
-        <input
-          type="number"
-          min="0"
-          step="0.01"
-          onChange={handleStakeAmountChange}
-          className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
-          placeholder="Amount to stake in Ether"
-          name="stakeAmount"
-          value={inputValue.stakeAmount}
-          required
-        />
-        <button
-          type="button"
-          onClick={handleCreateAdvertisement}
-          className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          disabled={transactionProcessing}
-        >
-          {transactionProcessing ? "Processing..." : "Create Ad"} 
-        </button>
-
-      </form>
+            <label>Stake Amount (MATIC)</label>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              onChange={handleStakeAmountChange}
+              className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+              placeholder="Amount to stake in Ether"
+              name="stakeAmount"
+              value={inputValue.stakeAmount}
+              required
+            />
+            <button
+              type="button"
+              onClick={handleCreateAdvertisement}
+              className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              disabled={transactionProcessing}
+            >
+              {transactionProcessing ? "Processing..." : "Create Ad"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default FormForAds
+export default FormForAds;

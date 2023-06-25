@@ -249,7 +249,7 @@ const Form = () => {
         ref={fileInputRef}
         id="fileInput"
         type="file"
-        accept="video/*"
+        accept="image/*, video/*"
         onChange={handleImageFileChange}
         className="hidden"
         name="file"
