@@ -1,7 +1,5 @@
 # Videre 🎥 | ETHGlobal Waterloo 2023 Project
-Live link: 
-
-Demo video:
+Demo Link: https://ethglobal.com/showcase/videre-wk314
 
 Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with content creators and advertisers. By leveraging token-bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token-bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
 
@@ -15,7 +13,7 @@ Twitter is full of bots. TikTok's algorithm + data is private and they're gettin
 1. Content creator uploads a video as an NFT (ERC-721)
 2. Content creator calls `getAd()` function, which creates a TBA (address) of the ERC-721 (using the ERC-721 tokenID + smart contract address)
 
-### Sample userflow
+### Sample Userflow
 1. Advertiser wants to put an ad on a creator's video
     - Using keywords, ads are matched with the most related videos
     - Advertiser sends ETH to the Videre smart contract
