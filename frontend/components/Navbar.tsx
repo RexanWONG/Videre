@@ -4,6 +4,7 @@ import Image from "next/image";
 import Logo from "../assets/videre-logo.png";
 import { IoMdAdd } from "react-icons/io";
 import { MetaMaskSDK } from '@metamask/sdk';
+import truncateEthAddress from 'truncate-eth-address';
 
 
 const Navbar = () => {
@@ -70,7 +71,7 @@ const Navbar = () => {
         <button className=" border-2 px-2 md:px-6 py-2 md:py-3 bg-blue-400 text-white text-md font-semibold font-raleway flex items-center gap-2 rounded-full hover:scale-110 hover:bg-blue-500 hover:text-white transition-all duration-200" 
         onClick={connectWallet}>Connect Wallet</button>
       ) : (
-        <p className='font-bold font-raleway'>{currentAccount}</p>
+        <p className='font-bold font-raleway'>{truncateEthAddress(currentAccount)}</p>
       
       )
       
