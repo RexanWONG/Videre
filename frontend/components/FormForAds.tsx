@@ -12,6 +12,7 @@ const FormForAds = () => {
   const [uploadedOntoIpfs, setUploadedOntoIpfs] = useState(false);
   const [videoInserted, setVideoInserted] = useState(false);
   const [keyword, setKeyword] = useState(""); 
+  const [transactionProcessing, setTransactionProcessing] = useState(false);
 
   const [inputValue, setInputValue] = useState({
     name: "",
@@ -38,6 +39,13 @@ const FormForAds = () => {
     setInputValue((prevFormData) => ({
       ...prevFormData,
       [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleStakeAmountChange = (event) => {
+    setInputValue((prevFormData) => ({
+      ...prevFormData,
+      stakeAmount: event.target.value,
     }));
   };
 
@@ -100,6 +108,34 @@ const FormForAds = () => {
       ),
     }));
   };
+
+  const handleCreateAdvertisement = async () => {
+    setTransactionProcessing(true);
+    try {
+      const transaction = await videreContract.createAdvertisement(
+        inputValue.name,
+        inputValue.contentIpfsHash,
+        inputValue.listOfKeywords,
+        ethers.utils.parseEther(inputValue.stakeAmount.toString()),
+        {
+          value: ethers.utils.parseEther(inputValue.stakeAmount.toString())
+        }
+      );
+
+      const transactionResult = await transaction.wait();
+      setTransactionProcessing(false);
+
+      if (transactionResult.status === 1) {
+        alert('Advertisement created successfully');
+      } else {
+        alert('Transaction failed');
+      }
+    } catch (error) {
+      console.log(error);
+      setTransactionProcessing(false);
+    }
+  };
+
 
 
   useEffect(() => {
@@ -193,6 +229,29 @@ const FormForAds = () => {
                 </li>
               ))}
             </ul>
+
+            <label>
+          Stake Amount
+        </label>
+        <input
+          type="number"
+          min="0"
+          step="0.01"
+          onChange={handleStakeAmountChange}
+          className="border border-gray-400 p-2 rounded-md w-full outline-none mb-5"
+          placeholder="Amount to stake in Ether"
+          name="stakeAmount"
+          value={inputValue.stakeAmount}
+          required
+        />
+        <button
+          type="button"
+          onClick={handleCreateAdvertisement}
+          className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          disabled={transactionProcessing}
+        >
+          {transactionProcessing ? "Processing..." : "Create Ad"} 
+        </button>
 
       </form>
     </div>
