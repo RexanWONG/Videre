@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { ImCancelCircle } from 'react-icons/im';
 import { GoVerified } from 'react-icons/go';
 
 import Image from 'next/image';
 import pfp from '../assets/pfp.png';
+import pfpBg from '../assets/pfp-bg.jpg';
 
 const Profile: React.FC = () => {
+    const [backgroundImage, setBackgroundImage] = useState('');
+
   const [showPopup, setShowPopup] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -21,10 +24,13 @@ const Profile: React.FC = () => {
   const handleTooltipLeave = () => {
     setShowTooltip(false);
   };
+  useEffect(() => {
+    setBackgroundImage(`url(${pfpBg})`);
+  }, []);
 
   return (
     <>
-      <div className="relative">
+<div className="relative bg-cover bg-center" style={{ backgroundImage }}>
         <div className="">
           <div className="text-2xl flex items-center gap-3 justify-center" onClick={handlePopup}>
             <AiOutlineUser />
@@ -76,3 +82,4 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
+

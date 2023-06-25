@@ -230,7 +230,7 @@ const Form = () => {
               className="font-bold"
               style={{ display: "flex", alignItems: "center" }}
             >
-              Cover Image
+              Video
             </label>
             <div
         className={`border-dashed rounded-xl border-4 ${
@@ -244,7 +244,7 @@ const Form = () => {
       <div className="flex items-center justify-center bg-gray-200 rounded-full w-16 h-16 mb-5">
         <BiCloudUpload size={48} />
       </div>
-      <h1 className="text-center">Upload or drag your cover image file.</h1>
+      <h1 className="text-center">Upload or drag your cover video file.</h1>
       <input
         ref={fileInputRef}
         id="fileInput"
