@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import Card from "./Card"
 import Form from "./Form"
 import Content from "./Content";
+import FormForAds from "./FormForAds";
 
 export{
     Navbar,
@@ -11,5 +12,6 @@ export{
     Banner,
     Card,
     Form,
-    Content
+    Content,
+    FormForAds
 };

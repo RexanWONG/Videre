@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Banner, Card, Form } from "../components";
+import { Banner, Card, FormForAds } from "../components";
 import Head from "next/head";
 import { ethers } from "ethers";
 import abi from '../components/data/Videre.json'
 import { MetaMaskSDK } from '@metamask/sdk';
 
-const Upload = () => {
+const UploadAds = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isRegistered, setIsRegistered] = useState(false)
 
@@ -66,7 +66,7 @@ const Upload = () => {
 
       {!isRegistered ? (
         <>
-          <Form />
+          <FormForAds />
         </>
       ) : (
         <h1>You are not registered yet.  Please register</h1>
@@ -75,4 +75,4 @@ const Upload = () => {
   );
 };
 
-export default Upload;
+export default UploadAds;
