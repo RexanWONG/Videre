@@ -1,13 +1,12 @@
-# Videre (ETHGlobal Waterloo 2023) 🎥 💸
+# Videre 🎥 | ETHGlobal Waterloo 2023 Project
 Live link: 
 
 Demo video:
 
-Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with users & advertisers. By leveraging token bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
+Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with content creators and advertisers. By leveraging token-bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token-bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
 
-**Creators** can redeem crypto for the videos they upload, with the amount determined by the number of likes their content receives.
-
-**Advertisers** send crypto to Videre's smart contract, which are redeemed by creators' video NFTs when desired. Through keywords submitted during the upload process, ads are matched with the appropriate videos. Advertisers also specify how much a content creator gets for every 1000 likes.
+- **Creators** can redeem crypto for the videos they upload, with the amount determined by the number of likes their content receives.
+- **Advertisers** send crypto to Videre's smart contract, which are redeemed by creators' video NFTs when desired. Through keywords submitted during the upload process, ads are matched with the appropriate videos. Advertisers also specify how much a content creator gets for every 1000 likes.
 
 Twitter is full of bots. TikTok's algorithm + data is private and they're getting banned everywhere. Some platforms also have censorship rules. Most of them pay their creators poorly. Videre solves these problems.
 
@@ -23,12 +22,21 @@ Twitter is full of bots. TikTok's algorithm + data is private and they're gettin
     - Videre smart contract sends the ETH to the video NFT (TBA), and creator can claim ad rewards (if they call the `withdraw` function)
 <img width="1176" alt="VidereUserFlow" src="https://github.com/RexanWONG/Videre/assets/66754344/1b7fb509-c79d-43a7-b0bb-9998938f82cd">
 
-# How it's made 🛠️
-Frontend
-- We used React and Next.js, written in TypeScript. `truncateEthAddress` was imported to truncate the ETH address on the navbar. Ethers was also used. Contracts were deployed on Polygon Mumbai.
-
-Blockchain
-- 1 Solidity smart contract was made to make the token bound accounts, along with numerous other functions. Hardhat was used. 
+# Tools 🛠️
+<table>
+    <tr>
+        <td> Languages </td>
+        <td> TypeScript, JavaScript, CSS </td>
+    </tr>
+    <tr>
+        <td> Framework & Libraries </td>
+        <td> React, Next.js, Tailwind, Ethers, truncateEthAddress, Polygon Mumbai, </td>
+    </tr>
+        <tr>
+        <td> Blockchain </td>
+        <td> Solidity smart contract, Hardhat</td>
+    </tr>
+</table>
 
 ### Bounties
  
