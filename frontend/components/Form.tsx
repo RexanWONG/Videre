@@ -14,7 +14,7 @@ const Form = () => {
   const [metadataURI, setMetadataURI] = useState("");
   const [contentIpfsHash, setContentIpfsHash] = useState("");
 
-  const contractAddress = "0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d";
+  const contractAddress = "0x0784405c4438fc61f013fD00Eaabb1962c5952e9";
   const contractABI = abi.abi;
   const [videreContract, setVidereContract] = useState(null);
 

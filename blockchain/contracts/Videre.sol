@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// POLYGON MUMBAI : 0x78584CE63aeCd8943D8A4119e679902fdA0B8C2d
+// POLYGON MUMBAI : 0x0784405c4438fc61f013fD00Eaabb1962c5952e9
 pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -189,6 +189,7 @@ contract Videre is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     }
 
     function matchAdContent(uint256 _advertisementId, uint256 _videoId) public {
+        require(_contentCreators[msg.sender].isAdvertiser == true, "Must be advitiser");
         Advertisement storage advertisement = _advertisements[_advertisementId];
         Video storage video = _videos[_videoId];
 

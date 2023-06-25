@@ -16,7 +16,7 @@ const Upload = () => {
    const MMSDK = new MetaMaskSDK(options);
    const ethereum = MMSDK.getProvider();
 
-  const contractAddress = '0xC7652D2fAB1fBe30D5C939965f38f4F552221EF0' 
+  const contractAddress = '0x0784405c4438fc61f013fD00Eaabb1962c5952e9' 
   const contractABI = abi.abi
   const [videreContract, setVidereContract] = useState(null);
 
