@@ -34,7 +34,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                 <p className="text-2xl">
                   <AiFillHome />
                 </p>
-                <span className="capitalize font-montserrat text-xl hidden xl:block">For You</span>
+                <span className="capitalize font-montserrat text-xl hidden xl:block py-1">For You</span>
               </div>
             </Link>
           </div>
