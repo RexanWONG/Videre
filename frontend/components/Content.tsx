@@ -13,27 +13,24 @@ const Content = () => {
     
     const getVideosWithLikes = async () => {
         try {
-            if (videreContract) {
-                let videoList = [];
-                let numOfVideos = await videreContract.getNumbers();
-                const numberOfVideos = numOfVideos[1].toString();
-                console.log(numberOfVideos);
-        
-                for (let i = 0 ; i < numberOfVideos ; i++) {
-                    const video = await videreContract.getVideo(i);
-                    const videoLikeInfo = await videreContract.getVideoLikesInfo(i);
-
-                    const ad = await videreContract.getAdvertisement(i)
-        
-                    // Combine video and likes info into one object
-                    videoList.push({
-                        ...video,
-                        likes: videoLikeInfo[0].toString(), // Assuming the first element of videoLikeInfo is the number of likes
-                        likedBy: videoLikeInfo[1], // Assuming the second element of videoLikeInfo is the list of addresses who liked the video
-                        adIpfsContent: ad[3],
-                        adName: ad[1]
-                    });
-                }
+            let videoList = [];
+            let numOfVideos = await videreContract.getNumbers();
+            const numberOfVideos = numOfVideos[1].toString();
+            console.log(numberOfVideos);
+    
+            for (let i = 0 ; i < numberOfVideos ; i++) {
+                const video = await videreContract.getVideo(i);
+                const videoLikeInfo = await videreContract.getVideoLikesInfo(i);
+                const ad = await videreContract.getAdvertisement(i)
+    
+                // Combine video and likes info into one object
+                videoList.push({
+                    ...video,
+                    likes: videoLikeInfo[0].toString(), // Assuming the first element of videoLikeInfo is the number of likes
+                    likedBy: videoLikeInfo[1], // Assuming the second element of videoLikeInfo is the list of addresses who liked the video
+                    adIpfsContent: ad[3],
+                    adName: ad[1]
+                });
             }
     
             console.log(videoList);
