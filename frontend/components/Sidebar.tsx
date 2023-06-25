@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { AiFillHome, AiOutlineMenu,  AiOutlineUpload } from 'react-icons/ai';
+import { RiAdvertisementLine } from 'react-icons/ri'
 import { ImCancelCircle } from 'react-icons/im';
 import Profile from './Profile';
 
@@ -47,6 +48,15 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
                 <div className={pathname === '/upload' ? activeLink : normalLink}>
                   <p className="text-2xl">
                     <AiOutlineUpload />
+                  </p>
+                  <span className="capitalize font-montserrat text-xl hidden xl:block">Upload</span>
+                </div>
+              </Link>
+
+              <Link href="/ads">
+                <div className={pathname === '/ads' ? activeLink : normalLink}>
+                  <p className="text-2xl">
+                    <RiAdvertisementLine />
                   </p>
                   <span className="capitalize font-montserrat text-xl hidden xl:block">Upload</span>
                 </div>
