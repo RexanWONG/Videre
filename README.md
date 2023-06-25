@@ -5,7 +5,7 @@ Demo video:
 
 Videre is a TikTok-style video-sharing platform that revolutionizes the way content creators interact with users & advertisers. By leveraging token bound accounts (ERC-6551), advertisers can send crypto to the creators’ video NFTs (token bound accounts). Having these video NFTs hold ERC-20 tokens demonstrates how “valuable” the videos are to the creators.
 
-**Creators** can redeem crypto for the videos they upload, with the amount determined by the number of likes their content receives. The platform's user base consists of real users, verified by Worldcoin ID, who engage with the content. Verified Worldcoin ID creators also receive more crypto, which incentivizes all users to prove they’re human. This ensures creators build authentic relationships with their audience and prevents the presence of bots.
+**Creators** can redeem crypto for the videos they upload, with the amount determined by the number of likes their content receives
 
 **Advertisers** send crypto to Videre's smart contract, which are redeemed by creators' video NFTs when desired. Through keywords submitted during the upload process, ads are matched with the appropriate videos. Advertisers also specify how much a content creator gets for every 1000 likes.
 
