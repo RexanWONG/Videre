@@ -78,7 +78,7 @@ const Sidebar: NextPage<SidebarProps> = ({ isAuthenticated }) => {
             </>
           )}
         </div>
-      )}
+      )}  
     </div>
   );
 };

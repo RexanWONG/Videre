@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 import { AiOutlineHeart } from 'react-icons/ai'
 
 const Content = () => {
-    const contractAddress = '0x0784405c4438fc61f013fD00Eaabb1962c5952e9'; 
+    const contractAddress = '0xAd4f805527BC493E9ba3721ECa01d635d43B4c32'; 
     const contractABI = abi.abi;
     const [videreContract, setVidereContract] = useState(null);
     const [videos, setVideos] = useState([]); 
@@ -40,14 +40,6 @@ const Content = () => {
         }
     };
 
-    // const getAd = async (id) => {
-    //     const ad = await videreContract.getAdvertisement(id)
-
-    //     return ad[3];
-
-    // }
-    
-    // Update the useEffect hook
     useEffect(() => {
         const initEthereum = async () => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -129,7 +121,7 @@ const Content = () => {
                                     url={`https://ipfs.io/ipfs/${video.adIpfsContent}`}
                                     controls={true}
                                     width="400px"
-                                    height="700px"
+                                    height="300px"
                                 />
                             </div>
                         </div>

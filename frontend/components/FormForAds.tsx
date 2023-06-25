@@ -8,7 +8,7 @@ import Ads from  "../assets/ads.jpg";
 import Image from "next/image";
 
 const FormForAds = () => {
-  const contractAddress = "0x0784405c4438fc61f013fD00Eaabb1962c5952e9";
+  const contractAddress = "0xAd4f805527BC493E9ba3721ECa01d635d43B4c32";
   const contractABI = abi.abi;
   const [videreContract, setVidereContract] = useState(null);
   const [uploadedOntoIpfs, setUploadedOntoIpfs] = useState(false);
