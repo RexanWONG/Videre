@@ -37,3 +37,7 @@ Blockchain
 **MetaMask SDK**: for wallet login flow and account info
 
 **IPFS**: video storage through Infura
+
+**Polygon**: deployed on Polygon
+- Tweet: https://twitter.com/mattwong_ca/status/1672913819776040961?s=20
+- Smart contract: https://mumbai.polygonscan.com/address/0xAd4f805527BC493E9ba3721ECa01d635d43B4c32
