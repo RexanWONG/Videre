@@ -10,6 +10,7 @@ const Home: NextPage = () => {
         <title>Videre™</title>
       </Head>
       <Banner />
+      
     </div>
   );
 };
